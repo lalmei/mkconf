@@ -9,11 +9,11 @@ endif
 # set default shell
 SHELL=/usr/bin/env bash -o pipefail -o errexit
 
-TAG ?= $(shell cat TAG)
+APP_VERSION ?= 0.1.0
+VERSUIB ?= $(shell cat TAG)
 POETRY_HOME ?= ${HOME}/.local/share/pypoetry
 POETRY_BINARY ?= ${POETRY_HOME}/venv/bin/poetry
 POETRY_VERSION ?= 1.3.2
-
 
 version := 0.1.0
 
@@ -45,8 +45,6 @@ show-version:  ## Display version
 	echo -n "${TAG}"
 
 
-
-
 .PHONY: install
 install:  ## Install monitoring_models with poetry
 	@scripts/install.sh
@@ -70,6 +68,11 @@ clean: ## Remove all build artifacts.
 	rm -f $(python.pyc)
 	rm -rf $(pytest.cache.dir)
 	rm -rf $(cache.dir)
+
+.PHONY: test
+test: ${test.python} ${src.python} clean ## Run tests in the poetry environment.
+	@$(call i, Running tests)
+	${POETRY_BINARY} run pytest -c=configs/pytest.ini ${test.python}
 
 
 	
