@@ -1,3 +1,11 @@
 organizers:
-  - 
-    name: "Organizer" 
+    - name: "name1"
+      title: "title1"
+      company: "company1"
+      image: /path/to/image1.jpg
+      social_link: "https://linkedin.com/in/name1"
+    - name: "name2"
+      title: "title2"
+      company: "company2"
+      image: /path/to/image2.jpg
+      social_link: "https://linkedin.com/in/name2"
