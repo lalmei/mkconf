@@ -66,9 +66,9 @@ class SpeakersConfig(MkDocsConfig):
     image = opt.Type(str, default='')
 
 class ConfConfig(MkDocsConfig):
-    speakers_file = opt.Type(str, default='speakers.yaml')
-    organizers_file = opt.Type(str, default='organizers.yaml')
-    agenda_file = opt.Type(str, default='agenda.yaml')
+    speakers_file = opt.Type(str, default='speakers.yml')
+    organizers_file = opt.Type(str, default='organizers.yml')
+    agenda_file = opt.Type(str, default='agenda.yml')
     
     speakers = opt.ListOfItems(opt.SubConfig(SpeakersConfig),default=[])
     organizers = opt.ListOfItems(opt.SubConfig(OrganizersConfig),default=[])
