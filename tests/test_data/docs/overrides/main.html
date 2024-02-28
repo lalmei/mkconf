@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<div>
+{{config.plugins.mkconf.config.speakers_file}} 
+{{config.plugins.mkconf.config.speakers}} 
+
+{{config.plugins.mkconf.config.organizers_file}} 
+{% for speaker in config.plugins.mkconf.config.speakers %}
+
+    <h1>{{ speaker.name }}</h1>
+    <p>{{ speaker.title }}</p>
+
+{% endfor %}
+</div>
+
+{% endblock %}

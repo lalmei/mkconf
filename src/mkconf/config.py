@@ -68,6 +68,11 @@ class SpeakersConfig(MkDocsConfig):
 
 
 class ConfConfig(MkDocsConfig):
+
+    conference_title = opt.Type(str, default="")
+    conference_subtitle = opt.Type(str, default="")
+    conference_location = opt.Type(str, default="")
+
     speakers_file = opt.Type(str, default="speakers.yml")
     organizers_file = opt.Type(str, default="organizers.yml")
     agenda_file = opt.Type(str, default="agenda.yml")

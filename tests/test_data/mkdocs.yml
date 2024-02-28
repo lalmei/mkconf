@@ -5,6 +5,7 @@ site_dir: 'site/'
       
 plugins:
   - mkconf:
+      conference_title: "Conference"
       speakers_file: ".speakers.yaml"
       organizers_file: ".organizers.yaml"
       agenda_file: ".agenda.yaml"
@@ -12,6 +13,7 @@ plugins:
 nav:
   - Home: index.md
 
+# modifing the templates.
 theme:
   name: mkdocs
   custom_dir: docs/overrides/

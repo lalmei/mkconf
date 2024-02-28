@@ -37,6 +37,5 @@ class ConfPlugin(BasePlugin[ConfConfig]):
         if len(opt) == 0:
             logger.error("configuration is empty")
 
-        _, _ = self.load_config(options=opt)
-
+        self.config.load_dict(patch= opt)
         return config
