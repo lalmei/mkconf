@@ -1,16 +1,15 @@
-from typing import Optional
-
 from mkdocs.config import Config as MkDocsConfig
 from mkdocs.plugins import get_plugin_logger
 from mkdocs.config import config_options as opt
 
 logger = get_plugin_logger(__name__)
 
-class TimeDisplayConfig(MkDocsConfig):
 
+class TimeDisplayConfig(MkDocsConfig):
     h = opt.Type(int, default=0)
     m = opt.Type(int, default=0)
-    a = opt.Type(type_=opt.Choice(['am', 'pm']), default="am")
+    a = opt.Type(type_=opt.Choice(["am", "pm"]), default="am")
+
 
 class AgendaConfig(MkDocsConfig):
     """
@@ -22,10 +21,12 @@ class AgendaConfig(MkDocsConfig):
         display (ListofItems[TimeDisplayConfig]): The time display configuration for the agenda item.
         location (str): The location of the agenda item.
     """
+
     range_t = opt.Type(list[str], default=[])
-    desc = opt.Type(str, default='')
+    desc = opt.Type(str, default="")
     display = opt.SubConfig(TimeDisplayConfig)
-    location = opt.Type(str, default='')
+    location = opt.Type(str, default="")
+
 
 class OrganizersConfig(MkDocsConfig):
     """
@@ -40,11 +41,11 @@ class OrganizersConfig(MkDocsConfig):
 
     """
 
-    name = opt.Type(str, default='')
-    title = opt.Type(str, default='')
-    company = opt.Type(str, default='')
-    social_link = opt.Type(str, default='')
-    image = opt.Type(str, default='')
+    name = opt.Type(str, default="")
+    title = opt.Type(str, default="")
+    company = opt.Type(str, default="")
+    social_link = opt.Type(str, default="")
+    image = opt.Type(str, default="")
 
 
 class SpeakersConfig(MkDocsConfig):
@@ -59,17 +60,18 @@ class SpeakersConfig(MkDocsConfig):
         image (str): The image of the speaker.
     """
 
-    name = opt.Type(str, default='')
-    title = opt.Type(str, default='')
-    company = opt.Type(str, default='')
-    social_link = opt.Type(str, default='')
-    image = opt.Type(str, default='')
+    name = opt.Type(str, default="")
+    title = opt.Type(str, default="")
+    company = opt.Type(str, default="")
+    social_link = opt.Type(str, default="")
+    image = opt.Type(str, default="")
+
 
 class ConfConfig(MkDocsConfig):
-    speakers_file = opt.Type(str, default='speakers.yml')
-    organizers_file = opt.Type(str, default='organizers.yml')
-    agenda_file = opt.Type(str, default='agenda.yml')
-    
-    speakers = opt.ListOfItems(opt.SubConfig(SpeakersConfig),default=[])
-    organizers = opt.ListOfItems(opt.SubConfig(OrganizersConfig),default=[])
-    agenda = opt.ListOfItems(opt.SubConfig(AgendaConfig),default=[])
+    speakers_file = opt.Type(str, default="speakers.yml")
+    organizers_file = opt.Type(str, default="organizers.yml")
+    agenda_file = opt.Type(str, default="agenda.yml")
+
+    speakers = opt.ListOfItems(opt.SubConfig(SpeakersConfig), default=[])
+    organizers = opt.ListOfItems(opt.SubConfig(OrganizersConfig), default=[])
+    agenda = opt.ListOfItems(opt.SubConfig(AgendaConfig), default=[])

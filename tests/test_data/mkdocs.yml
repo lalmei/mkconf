@@ -4,13 +4,14 @@ docs_dir: 'docs'
 site_dir: 'site/'
       
 plugins:
-  - literate-nav:
-      nav_file: SUMMARY.md
   - mkconf:
       speakers_file: ".speakers.yaml"
       organizers_file: ".organizers.yaml"
       agenda_file: ".agenda.yaml"
 
+nav:
+  - Home: index.md
 
-
-
+theme:
+  name: mkdocs
+  custom_dir: docs/overrides/

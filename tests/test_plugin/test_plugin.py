@@ -33,3 +33,8 @@ def test_plugin_run(tmp_path:Path) -> None:
     config= load_config(config_file=str(test_config_path))
     config.site_dir = tmp_path  
     build.build(config)
+    assert (tmp_path / "index.html").exists()
+    with open( (tmp_path / "index.html"), 'r') as file:
+        html = file.read()
+    print(html)    
+    assert 'name1' in html

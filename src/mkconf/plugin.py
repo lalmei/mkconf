@@ -1,11 +1,9 @@
 import yaml
-from typing import Optional
 from pathlib import Path
 
 from mkdocs.config import Config as MkDocsConfig
 from mkdocs.plugins import BasePlugin, get_plugin_logger
-from mkdocs.config import   config_options as opt
-from jinja2 import Template
+
 
 from mkconf.config import ConfConfig
 
@@ -13,34 +11,32 @@ logger = get_plugin_logger(__name__)
 
 
 class ConfPlugin(BasePlugin[ConfConfig]):
-    
-    def on_config(self, config: MkDocsConfig, **kwargs): 
-        
-        conf_config = config.plugins['mkconf'].config
-        print(kwargs)
-        opt ={}
-        if Path(conf_config.speakers_file).exists():
-            with open(conf_config.speakers_file, 'r') as f:
-                speakers_config = yaml.safe_load(f)
-            opt["speakers"] = speakers_config
-        else: 
-            logger.error("Could not find speakers yaml file")
+    def on_config(self, config: MkDocsConfig, **kwargs) -> MkDocsConfig:
+        # file paths should be relateive to mkdocs config.
+        configuration_files = [
+            self.config.speakers_file,
+            self.config.organizers_file,
+            self.config.agenda_file,
+        ]
 
-        if Path(conf_config.organizers_file).exists():
-            with open(conf_config.organizers_file, 'r') as f:
-                organizers_config = yaml.safe_load(f)
-            opt["organizers"] = organizers_config
-        else: 
-            logger.error("Could not find organizers yaml file")
+        opt: dict = {}
 
-        if Path(conf_config.agenda_file).exists():
-            with open(conf_config.agenda_file, 'r') as f:
-                agenda_config = yaml.safe_load(f)
-            opt["agenda"] = agenda_config
-        else: 
-            logger.error("Could not find agenda yaml file")
-        
-        self.load_config(options=opt)
+        for config_file in configuration_files:
+            config_file = Path(config.config_file_path).parent / config_file
 
-        config.plugins['mkconf'].config = conf_config
+            if not Path(config_file).exists():
+                logger.error(f"Could not find {config_file}")
+            try:
+                with open(config_file, "r") as f:
+                    config_content = yaml.safe_load(f)
+                    for key, value in config_content.items():
+                        opt[key] = value
+            except Exception as e:
+                logger.error(f"Could not load configureation from {config_file}: {e}")
+
+        if len(opt) == 0:
+            logger.error("configuration is empty")
+
+        _, _ = self.load_config(options=opt)
+
         return config
