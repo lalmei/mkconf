@@ -36,6 +36,7 @@ def test_plugin_run(tmp_path:Path) -> None:
     assert (tmp_path / "index.html").exists()
     with open( (tmp_path / "index.html"), 'r') as file:
         html = file.read()
+
     assert 'name1' in html
     assert 'name2' in html
     assert 'title1' in html

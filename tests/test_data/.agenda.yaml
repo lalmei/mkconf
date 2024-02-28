@@ -1,0 +1,16 @@
+agenda:
+  - range: ["8:00", "8:15"]
+    display:
+      h: 8
+      m: ""
+      a: "am"
+    location: ""
+    desc: "Opening Remarks & Welcome"
+
+  - range: ["8:15", "9:45"]
+    display:
+      h: 8
+      m: 15
+      a: "am"
+    location: ""
+    desc: "Keynote Speech"
