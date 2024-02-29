@@ -15,7 +15,7 @@ POETRY_HOME ?= ${HOME}/.local/share/pypoetry
 POETRY_BINARY ?= ${POETRY_HOME}/venv/bin/poetry
 POETRY_VERSION ?= 1.3.2
 
-version := 0.1.0
+version := 0.2.0
 
 src.python := $(shell find ./src -type f -name "*.py" || :)
 test.python := $(shell find ./tests -type f -name "*.py" || :)
@@ -36,6 +36,8 @@ output.dir := output
 ###################
 # Build & Release #
 ###################
+
+build.wheel := $(dist.dir) /
 
 
 
